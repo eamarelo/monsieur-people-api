@@ -6,7 +6,7 @@ const compression = require('compression');
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
-const db = require('../db.js');
+const con = require('../db.js');
 const userSchema = require('./models/userSchema.js');
 // Core
 const routes = require('./controllers/routes.js');
@@ -47,7 +47,12 @@ module.exports = class Server {
         new routes.class.Create(this.app);
         new routes.class.GetClass(this.app);
         new routes.class.GetOneClass(this.app);
+
+        new routes.contact.SearchContact(this.app);
         new routes.contact.CreateContact(this.app);
+        new routes.contact.DeleteContact(this.app);
+        new routes.contact.ShowContact(this.app);
+        new routes.contact.UpdateContact(this.app, this.con);
 
         // If route not exist
         this.app.use((req, res) => {
@@ -71,7 +76,7 @@ module.exports = class Server {
    */
     run () {
         try {
-            this.db;
+            this.con;
             this.security();
             this.middleware();
             this.routes();

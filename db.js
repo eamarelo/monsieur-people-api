@@ -5,7 +5,7 @@ const con = mysql.createConnection({
   host: 'localhost',
   user: 'root', // PUT YOUR USERNAME HERE
   password: 'password', // PUT YOUR PASSWORD HERE
-  database: 'contact'
+  database: 'apiMysql'
 });
 
 con.connect((err) => {
@@ -14,6 +14,7 @@ con.connect((err) => {
     return;
   }
   console.log('Connection established!!!!!!!!!!!!!!!!!!!!!!!!!');
+  return con
 });
 
 module.exports = con

@@ -9,6 +9,10 @@ const Create = require('./class/create.js')
 const GetClass = require('./class/get.js')
 const GetOneClass = require('./class/getOneClass.js')
 const CreateContact = require('./contact/create.js')
+const SearchContact = require('./contact/search.js')
+const DeleteContact = require('./contact/destroy.js')
+const ShowContact = require('./contact/show.js')
+const UpdateContact = require('./contact/update.js')
 
 module.exports = {
   user: {
@@ -28,6 +32,10 @@ module.exports = {
     GetOneClass
   }, 
   contact: {
-    CreateContact
+    CreateContact,
+    SearchContact,
+    DeleteContact,
+    ShowContact,
+    UpdateContact
   }
 }

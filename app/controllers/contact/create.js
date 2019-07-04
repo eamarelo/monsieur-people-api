@@ -26,8 +26,10 @@ module.exports = class Create {
             } = req.body
         const queryString = `INSERT INTO contact (nom, prenom, telephone, adresse, ville)
         VALUES (?, ?, ?, ?, ?)`
-        con.query(queryString, [ nom, prenom, telephone, adresse, ville])
-        return res.status(200).json(queryString)
+        con.query(queryString, [ nom, prenom, telephone, adresse, ville], (error, result, field) => {
+          console.log(result)
+          return res.status(200).json(result)
+        })
       } catch (e) {
         console.log(e)
         console.error(`[ERROR] contact/create -> ${e}`)
