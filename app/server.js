@@ -44,15 +44,6 @@ module.exports = class Server {
         new routes.user.Destroy(this.app);
         new routes.auth.Authentification(this.app);
         new routes.auth.Login(this.app);
-        new routes.class.Create(this.app);
-        new routes.class.GetClass(this.app);
-        new routes.class.GetOneClass(this.app);
-
-        new routes.contact.SearchContact(this.app);
-        new routes.contact.CreateContact(this.app);
-        new routes.contact.DeleteContact(this.app);
-        new routes.contact.ShowContact(this.app);
-        new routes.contact.UpdateContact(this.app, this.con);
 
         // If route not exist
         this.app.use((req, res) => {

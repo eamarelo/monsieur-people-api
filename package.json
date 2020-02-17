@@ -1,9 +1,9 @@
 {
-  "name": "LiveClassAPI",
+  "name": "MonsieurPeopleAPI",
   "version": "1.0.0",
   "author": "eamarelo <eamarelo@hotmail.fr>",
   "scripts": {
-    "build": "yarn install && yarn start",
+    "build": "npm i && npm start",
     "start": "node index.js",
     "test": "mocha"
   },

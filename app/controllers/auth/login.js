@@ -21,17 +21,13 @@
    middleware () {
     this.app.post('/auth/login', (req, res) => {
       try {
-        console.log("iciciciiciciciciciciciciciciciciciiciciciciiciciciicici")
         userSchema.findOne({ email: req.body.email }, function (err, userSchema) {
           if (err){
-           console.log("iciciciiciciciciciciciciciciciciciiciciciciiciciciicici")
            console.log(err) /*return res.status(500).send('Error on the server.')*/;
          }
          if (!userSchema) return res.status(404).send('No user found.');
          var passwordIsValid = bcrypt.compareSync(req.body.password, userSchema.password);
          if (!passwordIsValid){
-            console.log("tetede cochon")
-
             return res.status(401).send({ auth: false, token: null });
          } 
          var token = jwt.sign({ id: userSchema._id }, config.secret, {

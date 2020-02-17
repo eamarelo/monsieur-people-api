@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "api42",
+    "name": "MonsieurPeopleAPI",
     "script": "./index.js",
     "exec_mode": "cluster",
     "instances": 1

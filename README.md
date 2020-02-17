@@ -1,4 +1,4 @@
-# Live Class API
+# Monsieur People API
 
 ## Introduction  
 Here you can find the API for the project LiveClass by Elies AMARELO
