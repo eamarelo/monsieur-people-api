@@ -1,56 +1,71 @@
-    // AuthController.js
-    const jwt = require('jsonwebtoken');
-    const bcrypt = require('bcryptjs');
-    const config = require('./secret');
-    const VerifyToken = require('./verification');
+// Dependencies
 
-    const db = require('../../../db.js')
-    const validator = require('node-validator')
-    const userSchema = require('../../models/userSchema.js');
+const validator = require('node-validator')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const db = require("../../../db.js")
+const dotenv = require('dotenv')
 
-    module.exports = class Authentification {
-      constructor (app) {
+
+// Core
+const check = validator.isObject()
+    .withRequired('email', validator.isString())
+    .withRequired('password', validator.isString())
+
+module.exports = class Login {
+    constructor(app) {
         this.app = app
-
         this.run()
-      }
+    }
 
-  /**
-   * Middleware
-   */
-   middleware () {
-    this.app.post('/auth/login', (req, res) => {
-      try {
-        userSchema.findOne({ email: req.body.email }, function (err, userSchema) {
-          if (err){
-           console.log(err) /*return res.status(500).send('Error on the server.')*/;
-         }
-         if (!userSchema) return res.status(404).send('No user found.');
-         var passwordIsValid = bcrypt.compareSync(req.body.password, userSchema.password);
-         if (!passwordIsValid){
-            return res.status(401).send({ auth: false, token: null });
-         } 
-         var token = jwt.sign({ id: userSchema._id }, config.secret, {
-          expiresIn: 864000 // expires in 240 hours
-        });
-         res.status(200).send({ auth: true, token: token });
-       });
 
-      } catch (e) {
-        console.log(e)
-        console.error(`[ERROR] user/create -> ${e}`)
-        res.status(400).json({
-          'code': 400,
-          'message': 'Bad request'
+
+    /**
+     * Middleware
+     */
+    middleware() {
+        this.app.post('/login', validator.express(check), async(req, res) => {
+            try {
+
+                const userCheck = `select * from users where email = '${req.body.email}'`
+                const result = await db.promise().query(userCheck)
+                const user = result[0][0]
+
+                if (result[0].length === 0) {
+                    return res.status(401).json({
+                        message: 'Authentication failed. User not found.',
+                        auth: false
+                    })
+                }
+                if (!bcrypt.compareSync(req.body.password, user.password)) {
+                    return res.status(401).json({
+                        message: 'Authentication failed. Wrong password.',
+                        auth: false
+                    })
+                }
+                return res.status(200).json({
+                    token: jwt.sign({
+                        nom: user.nom,
+                        login: user.email,
+                        _id: user.id
+                    }, process.env.KEY_TOKEN),
+                    auth: true
+                })
+            } catch (e) {
+                console.log('login user')
+                console.error(`[ERROR] user/login -> ${e}`)
+                return res.status(400).json({
+                    code: 400,
+                    message: 'Bad request'
+                })
+            }
         })
-      }
-    })
-  }
+    }
 
-  /**
-   * Run
-   */
-   run () {
-    this.middleware()
-  }
+    /**
+     * Run
+     */
+    run() {
+        this.middleware()
+    }
 }
