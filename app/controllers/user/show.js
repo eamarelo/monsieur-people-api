@@ -1,7 +1,7 @@
 // Dependencies
 
 const validator = require('node-validator')
-const db = require("../../db.js")
+const db = require("../../../db.js")
 const dotenv = require('dotenv')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
@@ -30,7 +30,7 @@ module.exports = class Show {
                         message: 'missing params'
                     })
                 }
-                const userCheck = `select * from user where id=${req.query.id}`
+                const userCheck = `select * from users where id=${req.query.id}`
                 let result = await db.promise().query(userCheck)
                 if (result[0].length == 0) {
                     return res.status(401).json({

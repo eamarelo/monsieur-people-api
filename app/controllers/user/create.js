@@ -1,50 +1,89 @@
-// Core
-const db = require('../../../db.js')
-const mock = require('../../models/get-user.js')
+// Dependencies
+
 const validator = require('node-validator')
-const userSchema = require('../../models/userSchema.js');
+const db = require("../../../db.js")
+const dotenv = require('dotenv')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
+const jwt = require('jsonwebtoken')
 
+// Core
 const check = validator.isObject()
-.withRequired('name', validator.isString())
-.withOptional('age', validator.isNumber())
-.withOptional('gender', validator.isString({ regex: /^male|femal$/ }))
-
+    .withRequired('nom', validator.isString())
+    .withRequired('prenom', validator.isString())
+    .withRequired('email', validator.isString())
+    .withRequired('idRole', validator.isNumber())
+    .withOptional('idFileul', validator.isNumber())
+    .withOptional('idParain', validator.isNumber())
+    .withRequired('password', validator.isString())
 
 module.exports = class Create {
-  constructor (app) {
-    this.app = app
+    constructor(app) {
+        dotenv.config()
 
-    this.run()
-  }
+        this.app = app
+        this.run()
+    }
 
-  /**
-   * Middleware
-   */
-   middleware () {
-    this.app.post('/user/create', validator.express(check), (req, res) => {
-      try {
-        var user = new userSchema({ name: req.body.name, age: req.body.age, gender: req.body.gender });
-        user.save(function (err) {
-          if (err) return handleError(err);
-          // saved!
-          });
+    /**
+     * Middleware
+     */
+    middleware() {
+        this.app.post('/user/create', validator.express(check), async(req, res) => {
+            try {
+                const userCheck = `select * from users where email = '${req.body.email}'`
+                let result = await db.promise().query(userCheck)
+                if (result[0].length !== 0) {
+                    res.status(401).json({
+                        code: 401,
+                        message: 'user already exist'
+                    })
+                } else {
 
-        res.status(200).json(user || {})
-      } catch (e) {
-        console.log(e)
-        console.error(`[ERROR] user/create -> ${e}`)
-        res.status(400).json({
-          'code': 400,
-          'message': 'Bad request'
+                    const nom = req.body.nom || null
+                    const prenom = req.body.prenom || null
+                    const email = req.body.email || null
+                    const idRole = req.body.idRole || null
+                    const idFileul = req.body.idFileul || null
+                    const idParain = req.body.idParain || null
+                    const password = req.body.password || null
+
+                    const userCreate = `INSERT INTO users (nom, prenom, email, idRole, idFileul, idParain, password)` +
+                        `VALUES (` +
+                        `'${nom}', '${prenom}','${email}',${idRole},${idFileul}, ${idParain}, '${bcrypt.hashSync(password, saltRounds)}')`
+
+                    result = await db.promise().query(userCreate)
+
+                    const user = `select * from users where email = '${req.body.email}' `
+                    result = await db.promise().query(user)
+                    const toto = {
+                        token: jwt.sign({
+                                email: result[0][0].email,
+                                mdp: result[0][0].password,
+                                _id: result[0][0].id
+                            },
+                            process.env.KEY_TOKEN)
+                    }
+                    res.status(200).json(toto)
+                }
+
+
+            } catch (e) {
+
+                console.log('create user')
+                console.error(`[ERROR] user/create -> ${e}`)
+                res.status(400).json({
+                    code: 400,
+                    message: 'Bad request'
+                })
+            }
         })
-      }
-    })
-  }
+    }
 
-  /**
-   * Run
-   */
-   run () {
-    this.middleware()
-  }
+    /**
+     * Run
+     */
+    run() {
+        this.middleware()
+    }
 }
