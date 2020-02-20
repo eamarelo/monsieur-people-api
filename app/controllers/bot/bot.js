@@ -41,7 +41,7 @@ module.exports = class Bot {
                     if (req.body.question == 'bonjour') {
                         return res.status(200).send({
                             shows: true,
-                            message: [`Salut ${decoded.nom} ${decoded.prenom}, je suis Paul, ton assistant personnel! Pour démarrer peut-tu me donner tes centres d'intérêts`, 'test']
+                            message: `Salut ${decoded.nom} ${decoded.prenom}, je suis Paul, ton assistant personnel! Pour démarrer peut-tu me donner tes centres d'intérêts`
                         })
                     }
                     return res.status(200).send({
