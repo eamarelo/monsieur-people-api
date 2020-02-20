@@ -34,17 +34,21 @@ module.exports = class UserShow {
                         message: 'Failed to authenticate token.'
                     })
                     let decoded = jwtDecode(token)
-                    const user = `select * from users where nom = '${decoded.nom}' and prenom = '${decoded.prenom}' `
+                    const user = `select users.nom, users.prenom, users.email, users.idFileul, users.idParain, users.photo,
+                      classes.nom as class_name, classes.section
+                     from users inner join users_classes on users_classes.idUser = users.id 
+                     inner join classes  on users_classes.idClasse = classes.id
+                     where users.nom = '${decoded.nom}' and users.prenom = '${decoded.prenom}' `
                     const result = await db.promise().query(user)
                     const toto = {
-                        id: result[0][0].id,
                         nom: result[0][0].nom,
                         prenom: result[0][0].prenom,
-                        naissance: result[0][0].email,
-                        email: result[0][0].idRole,
+                        email: result[0][0].email,
                         idFileul: result[0][0].idFileul,
                         idParain: result[0][0].idParain,
-                        photo: result[0][0].photo
+                        photo: result[0][0].photo,
+                        classe: result[0][0].class_name,
+                        section: result[0][0].section
                     }
                     return res.status(500).send(toto)
                 })
