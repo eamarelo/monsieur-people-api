@@ -6,6 +6,7 @@ const Destroy = require("./user/destroy.js")
 const Authentification = require("./auth/authentification.js")
 const Verification = require("./auth/verification.js")
 const Login = require("./auth/login.js")
+const Bot = require("./bot/bot.js")
 
 module.exports = {
     user: {
@@ -19,5 +20,8 @@ module.exports = {
         Authentification,
         Verification,
         Login
+    },
+    bot: {
+        Bot
     }
 }

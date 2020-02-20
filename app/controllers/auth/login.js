@@ -45,8 +45,10 @@ module.exports = class Login {
                 }
                 return res.status(200).json({
                     token: jwt.sign({
+                        email: user.email,
+                        mdp: user.password,
                         nom: user.nom,
-                        login: user.email,
+                        prenom: user.prenom,
                         _id: user.id
                     }, process.env.KEY_TOKEN),
                     auth: true
