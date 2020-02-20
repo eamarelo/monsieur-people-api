@@ -1,20 +1,29 @@
-const mysql = require('mysql');
+const mysql = require('mysql2')
+const dotenv = require('dotenv')
+dotenv.config()
 
-// First you need to create a connection to the db
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root', // PUT YOUR USERNAME HERE
-  password: 'password', // PUT YOUR PASSWORD HERE
-  database: 'apiMysql'
-});
 
-con.connect((err) => {
-  if(err){
-    console.log(err + 'Error connecting to Db');
-    return;
-  }
-  console.log('Connection established!!!!!!!!!!!!!!!!!!!!!!!!!');
-  return con
-});
 
-module.exports = con
+// Create the connection pool. The pool-specific settings are the defaults
+const pool = mysql.createPool({
+    host: process.env.BDD_HOST,
+    user: process.env.BDD_USE,
+    password: process.env.BDD_MDP,
+    database: process.env.BDD_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+})
+const mySqlClient = mysql.createConnection({
+    host: process.env.BDD_HOST,
+    user: process.env.BDD_USER,
+    password: process.env.BDD_MDP,
+    database: process.env.BDD_NAME
+})
+this.db = mySqlClient.connect(function(err) {
+    if (err) throw err
+    console.log("Connected!")
+    if (err) throw err;
+
+})
+module.exports = mySqlClient
