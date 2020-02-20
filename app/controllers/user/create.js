@@ -16,6 +16,7 @@ const check = validator.isObject()
     .withOptional('idFileul', validator.isNumber())
     .withOptional('idParain', validator.isNumber())
     .withRequired('password', validator.isString())
+    .withRequired('photo', validator.isString())
 
 module.exports = class Create {
     constructor(app) {
@@ -47,10 +48,11 @@ module.exports = class Create {
                     const idFileul = req.body.idFileul || null
                     const idParain = req.body.idParain || null
                     const password = req.body.password || null
+                    const photo = req.body.photo || null
 
-                    const userCreate = `INSERT INTO users (nom, prenom, email, idRole, idFileul, idParain, password)` +
+                    const userCreate = `INSERT INTO users (nom, prenom, email, idRole, idFileul, idParain, password, photo)` +
                         `VALUES (` +
-                        `'${nom}', '${prenom}','${email}',${idRole},${idFileul}, ${idParain}, '${bcrypt.hashSync(password, saltRounds)}')`
+                        `'${nom}', '${prenom}','${email}',${idRole},${idFileul}, ${idParain}, '${bcrypt.hashSync(password, saltRounds)}', ${photo})`
 
                     result = await db.promise().query(userCreate)
 
@@ -60,6 +62,8 @@ module.exports = class Create {
                         token: jwt.sign({
                                 email: result[0][0].email,
                                 mdp: result[0][0].password,
+                                nom: result[0][0].nom,
+                                prenom: result[0][0].prenom,
                                 _id: result[0][0].id
                             },
                             process.env.KEY_TOKEN)

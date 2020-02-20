@@ -50,6 +50,8 @@ module.exports = class Server {
         new routes.auth.Authentification(this.app)
         new routes.auth.Login(this.app)
 
+        new routes.bot.Bot(this.app)
+
         // If route not exist
         this.app.use((req, res) => {
             res.status(404).json({
