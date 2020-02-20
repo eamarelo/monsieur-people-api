@@ -1,20 +1,19 @@
-// Dependencies
-
+// Core
+const jwt = require('jsonwebtoken')
 const validator = require('node-validator')
 const db = require("../../../db.js")
+const jwtDecode = require('jwt-decode')
+const {
+    poolPromise
+} = require('../../../db.js')
+
 const dotenv = require('dotenv')
-const bcrypt = require('bcrypt')
-const saltRounds = 10
-const jwt = require('jsonwebtoken')
 
-// Core
-const check = validator.isObject()
 
-module.exports = class Show {
+module.exports = class UserShow {
     constructor(app) {
-        dotenv.config()
-
         this.app = app
+
         this.run()
     }
 
@@ -24,44 +23,44 @@ module.exports = class Show {
     middleware() {
         this.app.get('/user/show', async(req, res) => {
             try {
-                if (!req.query.id) {
-                    return res.status(404).json({
-                        code: 404,
-                        message: 'missing params'
+                const token = req.headers['x-access-token']
+                if (!token) return res.status(401).send({
+                    shows: false,
+                    message: 'No token provided.'
+                })
+                jwt.verify(token, process.env.KEY_TOKEN, async(err) => {
+                    if (err) return res.status(500).send({
+                        shows: false,
+                        message: 'Failed to authenticate token.'
                     })
-                }
-                const userCheck = `select * from users where id=${req.query.id}`
-                let result = await db.promise().query(userCheck)
-                if (result[0].length == 0) {
-                    return res.status(401).json({
-                        code: 401,
-                        message: 'user dont exist'
-                    })
-                }
-                let toto = []
-                for (var i = 0; i <= result[0].length - 1; i++) {
-                    let user = {
-                        id: result[0][i].id,
-                        nom: result[0][i].nom,
-                        prenom: result[0][i].prenom,
-                        email: result[0][i].email,
-                        idRole: result[0][i].idRole,
-                        idFileul: result[0][i].idFileul,
-                        idParain: result[0][i].idParain,
-                        password: result[0][i].password
+                    let decoded = jwtDecode(token)
+                    const user = `select users.nom, users.prenom, users.email, users.idFileul, users.idParain, users.photo,
+                      classes.nom as class_name, classes.section
+                     from users inner join users_classes on users_classes.idUser = users.id 
+                     inner join classes  on users_classes.idClasse = classes.id
+                     where users.nom = '${decoded.nom}' and users.prenom = '${decoded.prenom}' `
+                    const result = await db.promise().query(user)
+                    const toto = {
+                        nom: result[0][0].nom,
+                        prenom: result[0][0].prenom,
+                        email: result[0][0].email,
+                        idFileul: result[0][0].idFileul,
+                        idParain: result[0][0].idParain,
+                        photo: result[0][0].photo,
+                        classe: result[0][0].class_name,
+                        section: result[0][0].section
                     }
-                    toto[i] = user
-                }
-                res.status(200).json(toto)
+                    return res.status(500).send(toto)
+                })
             } catch (e) {
 
-                console.log('show user')
-                console.error(`[ERROR] user/show -> ${e}`)
-                res.status(400).json({
+                console.error(`[ERROR] user/shows-> ${e}`)
+                return res.status(400).json({
                     code: 400,
                     message: 'Bad request'
                 })
             }
+            return null
         })
     }
 

@@ -11,14 +11,10 @@ const Bot = require("./bot/bot.js")
 module.exports = {
     user: {
         Show,
-        Search,
         Create,
-        Update,
-        Destroy
+
     },
     auth: {
-        Authentification,
-        Verification,
         Login
     },
     bot: {

@@ -43,11 +43,8 @@ module.exports = class Server {
     routes() {
         new routes.user.Show(this.app)
         new routes.user.Create(this.app)
-        new routes.user.Search(this.app)
-        new routes.user.Update(this.app)
-        new routes.user.Destroy(this.app)
 
-        new routes.auth.Authentification(this.app)
+
         new routes.auth.Login(this.app)
 
         new routes.bot.Bot(this.app)
