@@ -41,12 +41,97 @@ module.exports = class Bot {
                     if (req.body.question == 'bonjour') {
                         return res.status(200).send({
                             shows: true,
-                            message: `Salut ${decoded.nom} ${decoded.prenom}, je suis Paul, ton assistant personnel! Pour démarrer peut-tu me donner tes centres d'intérêts`
+                            message: `Salut ${decoded.nom} ${decoded.prenom}, je suis Paul, ton assistant personnel! Pour démarrer peux-tu me donner tes centres d'intérêts`
                         })
                     }
+                    if (req.body.question == 'interets') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `Les catégories qui pourrait vous intéresser sont : SPORT , MUSIQUE , SOIREE , CDI , STAGE , ALTERNANCE . Tapez les mots clés dans le chat pour les mettres dans vos favories`
+                        })
+                    }
+                    if (req.body.question == 'sport') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `La catégorie SPORT a été ajoutée à vos favoris. Tu peux aussi aller sur la page Event pour les retrouver`
+                        })
+                    }
+                    if (req.body.question == 'musique') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `La catégorie MUSIQUE a été ajoutée à vos favoris. Tu peux aussi aller sur la page Event pour les retrouver`
+                        })
+                    }
+
+                    if (req.body.question == 'soiree') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `La catégorie SOIREE a été ajoutée à vos favoris. Tu peux aussi aller sur la page Event pour les retrouver`
+                        })
+                    }
+
+                    if (req.body.question == 'cdi') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `La catégorie CDI a été ajoutée à vos favoris. Tu peux aussi aller sur la page Event pour les retrouver`
+                        })
+                    }
+
+                    if (req.body.question == 'stage') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `La catégorie STAGE a été ajoutée à vos favoris. Tu peux aussi aller sur la page Event pour les retrouver`
+                        })
+                    }
+                    if (req.body.question == 'alternance') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `La catégorie ALTERNANCE a été ajoutée à vos favoris. Tu peux aussi aller sur la page Event pour les retrouver`
+                        })
+                    }
+
+                    if (req.body.question == 'musique stage') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `C'est génial! A partir de maintenant je t'enverrai des offres à partir de ce que tu m'as dis. Tu peux aussi aller sur la page Event pour les retrouver`
+                        })
+                    }
+                    if (req.body.question == 'club') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `La première règle du FIGHT CLUB ... `
+                        })
+                    }
+
+                    if (req.body.question == 'elfe') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `Clémence n'est pas disponible pour le moment. veuillez réessayer plus tard`
+                        })
+                    }
+                    if (req.body.question == 'girl') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `THIS GIRL IS ON FIRE !!!`
+                        })
+                    }
+
+                    if (req.body.question == 'help') {
+                        return res.status(200).send({
+                            shows: true,
+                            message: `Les mots que je comprends sont: 
+                            bonjour ,
+                            interets ,
+                            club ,
+                            elfe , 
+                            girl
+                            `
+                        })
+                    }
+
                     return res.status(200).send({
                         shows: true,
-                        message: 'je ne comprend pas votre demande'
+                        message: 'Je ne comprends pas votre demande'
                     })
 
                 })
