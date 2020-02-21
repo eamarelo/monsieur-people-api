@@ -21,7 +21,7 @@ module.exports = class UserShow {
      * Middleware
      */
     middleware() {
-        this.app.get('/user/show', async(req, res) => {
+        this.app.get('/events/shows', async(req, res) => {
             try {
                 const token = req.headers['x-access-token']
                 if (!token) return res.status(401).send({
@@ -33,24 +33,21 @@ module.exports = class UserShow {
                         shows: false,
                         message: 'Failed to authenticate token.'
                     })
-                    let decoded = jwtDecode(token)
-                    const user = `select users.nom, users.prenom, users.email, users.idFileul, users.idParain, users.photo,
-                      classes.nom as class_name, classes.section
-                     from users inner join users_classes on users_classes.idUser = users.id 
-                     inner join classes  on users_classes.idClasse = classes.id
-                     where users.nom = '${decoded.nom}' and users.prenom = '${decoded.prenom}' `
-                    const result = await db.promise().query(user)
-                    const toto = {
-                        nom: result[0][0].nom,
-                        prenom: result[0][0].prenom,
-                        email: result[0][0].email,
-                        idFileul: result[0][0].idFileul,
-                        idParain: result[0][0].idParain,
-                        photo: result[0][0].photo,
-                        classe: result[0][0].class_name,
-                        section: result[0][0].section
+                    const events = `select events.nom as eventsName, events.description, dateEvent, categories.nom, events.photo from events 
+                    inner join categories on categories.id = events.idCategorie`
+                    let result = await db.promise().query(events)
+                    let toto = []
+                    for (var i = 0; i <= result[0].length - 1; i++) {
+                        let user = {
+                            eventsName: result[0][i].eventsName,
+                            description: result[0][i].description,
+                            dateEvent: result[0][i].dateEvent,
+                            categorie: result[0][i].nom,
+                            photo: result[0][i].photo
+                        }
+                        toto[i] = user
                     }
-                    return res.status(200).send(toto)
+                    res.status(200).json(toto)
                 })
             } catch (e) {
 

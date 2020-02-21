@@ -7,6 +7,8 @@ const Authentification = require("./auth/authentification.js")
 const Verification = require("./auth/verification.js")
 const Login = require("./auth/login.js")
 const Bot = require("./bot/bot.js")
+const EventsShow = require("./events/showAll.js")
+
 
 module.exports = {
     user: {
@@ -19,5 +21,8 @@ module.exports = {
     },
     bot: {
         Bot
+    },
+    events: {
+        EventsShow
     }
 }
