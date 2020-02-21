@@ -48,6 +48,7 @@ module.exports = class Server {
         new routes.auth.Login(this.app)
 
         new routes.bot.Bot(this.app)
+        new routes.events.EventsShow(this.app)
 
         // If route not exist
         this.app.use((req, res) => {
