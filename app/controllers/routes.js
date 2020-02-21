@@ -8,6 +8,8 @@ const Verification = require("./auth/verification.js")
 const Login = require("./auth/login.js")
 const Bot = require("./bot/bot.js")
 const EventsShow = require("./events/showAll.js")
+const EventsPersoF = require("./events/showPersoFuture.js")
+const EventsPersoP = require("./events/showPersoPast.js")
 
 
 module.exports = {
@@ -23,6 +25,9 @@ module.exports = {
         Bot
     },
     events: {
-        EventsShow
+        EventsShow,
+        EventsPersoF,
+        EventsPersoP
+
     }
 }
