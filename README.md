@@ -5,7 +5,7 @@ install `nodejs` & `npm`
   
 ## How to use it
 - Clone this repository to your local storage:
-`git clone https://eamarelo@bitbucket.org/borderlinedev/borderline-api.git`
+`https://github.com/eamarelo/monsieur-people-api.git`
 - Config the .env
 - Install the database with the sql files
 - Install dependencies:
