@@ -12,11 +12,16 @@ install `nodejs` & `npm`
 `npm i`
 - Run the project to http://localhost:4444/ :
 `npm run start`
+
 ## UML
-<div style="text-align:center"><img src="./diagramme.png" width="300"></div>.
+<div style="text-align:center"><img src="./image.png" width="300"></div>.
+
 ## URL REQUEST
+
 ### USER PART
+
 #### Register an user
+
 URI : http://localhost:4444/api/auth/register
 method: POST  
 Data to send :
@@ -85,7 +90,9 @@ response:
         "__v": 0
     }
 ]`
+
 #### Get user by Id
+
 URI : http://localhost:4444/users/:id
 method: GET
 response: 
@@ -96,7 +103,9 @@ response:
     "password": "elies",
     "__v": 0
 }`
+
 #### Update an user
+
 URI : http://localhost:4444/users/:id
 method: PUT 
 data to send :
@@ -118,11 +127,15 @@ response before modification: `{
     "password": "elies",
     "__v": 0
 }`
+
 #### Delete an user
+
 URI : http://localhost:4444/users/:id
 method : DELETE
 resonse: User was deleted.
+
 #### Get user by token
+
 URI : http://localhost:4444/api/auth/me
 Headers:`{
     "x-access-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYmNjN2I1Mzc1ZTBkMTlmMGVjMjA2NSIsImlhdCI6MTUyMjMyMTMzMywiZXhwIjoxNTIyNDA3NzMzfQ.BHdZhxboUpGcTZVVv6ERAx3ttruGbUvf_Sw6mQPNPOA"
@@ -135,7 +148,9 @@ response :
     "email": "jaime@hotmail.fr",
     "__v": 0
 }`
+
 #### Login /Authentification
+
 URI : http://localhost:4444/api/auth/login
 data to send :
 `{
@@ -153,7 +168,9 @@ response if incorrect :
     "auth": false,
     "token": null
 }`
+
 ### BOT PART
+
  URI : http://localhost:4444/bot
  data to send : 
 `{
@@ -171,8 +188,11 @@ response if incorrect :
     "shows": false,
     "message": "Failed to authenticate token."
 }`
+
 ### EVENTS PART
+
 #### SHOW ALL EVENTS
+
 URI : http://localhost:4444/events/shows
 method: get
 HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
@@ -254,7 +274,9 @@ response if incorrect :
     "shows": false,
     "message": "Failed to authenticate token."
 }`
+
 #### SHOW FUTURES EVENTS
+
 URI : http://localhost:4444/events/show/futur
 method: get
 HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
@@ -301,7 +323,9 @@ response if incorrect :
     "shows": false,
     "message": "Failed to authenticate token."
 }`
+
 #### SHOW PAST EVENTS
+
 URI : http://localhost:4444/events/show/past
 method: get
 HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
