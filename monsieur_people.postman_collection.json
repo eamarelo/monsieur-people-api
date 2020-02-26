@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "aed2f707-8370-4492-aa8a-eb997f6d546c",
+		"name": "monsieur_people",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nom\": \"caillet\",\n\t\"prenom\": \"jean philippe\",\n\t\"email\": \"jp78920@hotmail.com\",\n\t\"idRole\": 2,\n\t\"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4444/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4444",
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyMjM3NTE2fQ.W5sd9joFgBef-NSRrMNckFf5yp8e1PQW9Dfc8DNG4xY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4444/user/show",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4444",
+							"path": [
+								"user",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jp7892@hotmail.com\",\n\t\"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.92.227.229/login",
+							"protocol": "http",
+							"host": [
+								"3",
+								"92",
+								"227",
+								"229"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "bot",
+			"item": [
+				{
+					"name": "bonjour",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiLCJtZHAiOiIkMmIkMTAkQ3pNVXBjZXp6Y3BqejFBUmxQSGFSLk1YRFk3NWlHU1FNd3NOUnFneC5mT01BQS9yTEM5U3kiLCJub20iOiJ0ZXN0IiwicHJlbm9tIjoidGVzdCIsIl9pZCI6NCwiaWF0IjoxNTgyMjM1NjU4fQ.3Eqm2aAV9jmmnfh12IUH9EA15AsidgedBU8kPy1nfcg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"question\": \"bonjour\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4444/bot",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4444",
+							"path": [
+								"bot"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "events",
+			"item": [
+				{
+					"name": "show all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show perso Future",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4444/events/show/futur",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4444",
+							"path": [
+								"events",
+								"show",
+								"futur"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show perso Past",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4444/events/show/futur",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4444",
+							"path": [
+								"events",
+								"show",
+								"futur"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
