@@ -22,9 +22,9 @@ install `nodejs` & `npm`
 
 #### Register an user
 
-URI : http://localhost:4444/api/auth/register
-method: POST  
-Data to send :
+- URI : http://localhost:4444/api/auth/register
+- method: POST  
+- Data to send :
 `{
     "nom": "caillet",
     "prenom": "jean philippe",
@@ -33,7 +33,7 @@ Data to send :
     "password": "1234"
 }`
   
-response: 
+- response: 
 `{
     "auth": true,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYmNmODJjNzRkM2NkMTZkODRiMzYyMiIsImlhdCI6MTUyMjMzMzc0MCwiZXhwIjoxNTIyNDIwMTQwfQ.ZhW2VDbOWk0m9iMMP5KifHdlwe5CFn9FjO7izBtcz6o"
@@ -41,10 +41,9 @@ response:
   
 #### Get list all users
   
-URI : http://localhost:4444/users/  
-method: GET
-  
-response: 
+- URI : http://localhost:4444/users/  
+- method: GET 
+- response: 
 `[
     {
         "_id": "5abcb9e23e638722f860de02",
@@ -93,9 +92,9 @@ response:
 
 #### Get user by Id
 
-URI : http://localhost:4444/users/:id
-method: GET
-response: 
+- URI : http://localhost:4444/users/:id
+- method: GET
+- response: 
 `{
     "_id": "5abcb9e23e638722f860de02",
     "name": "Guizmo",
@@ -106,13 +105,15 @@ response:
 
 #### Update an user
 
-URI : http://localhost:4444/users/:id
-method: PUT 
-data to send :
+- URI : http://localhost:4444/users/:id
+- method: PUT 
+- data to send :
+
 `{
     "name": "Aladin"
 }`
-response before modification: 
+
+- response before modification: 
 `{
     "_id": "5abcb9e23e638722f860de02",
     "name": "Guizmo",
@@ -120,7 +121,8 @@ response before modification:
     "password": "elies",
     "__v": 0
 }`
-response before modification: `{
+
+- response before modification: `{
     "_id": "5abcb9e23e638722f860de02",
     "name": "Aladin",
     "email": "jasmine@hotmail.fr",
@@ -130,18 +132,18 @@ response before modification: `{
 
 #### Delete an user
 
-URI : http://localhost:4444/users/:id
-method : DELETE
-resonse: User was deleted.
+- URI : http://localhost:4444/users/:id
+- method : DELETE
+- resonse: User was deleted.
 
 #### Get user by token
 
-URI : http://localhost:4444/api/auth/me
-Headers:`{
+- URI : http://localhost:4444/api/auth/me
+- Headers:`{
     "x-access-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYmNjN2I1Mzc1ZTBkMTlmMGVjMjA2NSIsImlhdCI6MTUyMjMyMTMzMywiZXhwIjoxNTIyNDA3NzMzfQ.BHdZhxboUpGcTZVVv6ERAx3ttruGbUvf_Sw6mQPNPOA"
 }`
-method : GET
-response :
+- method : GET
+- response :
 `{
     "_id": "5abcc7b5375e0d19f0ec2065",
     "name": "jaime",
@@ -151,19 +153,23 @@ response :
 
 #### Login /Authentification
 
-URI : http://localhost:4444/api/auth/login
-data to send :
+- URI : http://localhost:4444/api/auth/login
+- data to send :
+
 `{
     "email": "mail@mail.com",
     "password": "password"
 }`
-method: POST
-response if correct : 
+
+- method: POST
+- response if correct : 
+
 `{
     "auth": true,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYmNjN2I1Mzc1ZTBkMTlmMGVjMjA2NSIsImlhdCI6MTUyMjMzNDE2MSwiZXhwIjoxNTIzMTk4MTYxfQ.CmvzV9766J4HdowKyG2RRytaXFpWp1WFgQSBT-We1j4"
 }`
-response if incorrect : 
+
+- Response if incorrect : 
 `{
     "auth": false,
     "token": null
@@ -171,19 +177,22 @@ response if incorrect :
 
 ### BOT PART
 
- URI : http://localhost:4444/bot
- data to send : 
+ - URI : http://localhost:4444/bot
+ - data to send :
+ 
 `{
     "question": "bonjour"
 }`
-method: POST
-HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
-response if correct : 
+
+- method: POST
+- HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
+- response if correct : 
 `{
     "shows": true,
     "message": "Salut caillet jean philippe, je suis Paul, ton assistant personnel! Pour démarrer peux-tu me donner tes centres d'intérêts"
 }`
-response if incorrect : 
+
+- response if incorrect : 
 `{
     "shows": false,
     "message": "Failed to authenticate token."
@@ -193,10 +202,11 @@ response if incorrect :
 
 #### SHOW ALL EVENTS
 
-URI : http://localhost:4444/events/shows
-method: get
-HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
-response if correct : 
+- URI : http://localhost:4444/events/shows
+- method: get
+- HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
+
+- response if correct : 
 `[
     {
         "eventsName": "Tournois de tennis",
@@ -277,10 +287,11 @@ response if incorrect :
 
 #### SHOW FUTURES EVENTS
 
-URI : http://localhost:4444/events/show/futur
-method: get
-HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
-response if correct : 
+- URI : http://localhost:4444/events/show/futur
+- method: get
+- HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
+
+- response if correct : 
 `[
     {
         "eventsName": "Tournois de foot",
@@ -318,7 +329,9 @@ response if correct :
         "photo": "https://www.lerevenu.com/sites/site/files/styles/img_lg/public/field/image/capgemini_entreprise_3.jpg?itok=h8F08UYe"
     }
 ]`
-response if incorrect : 
+
+- response if incorrect : 
+
 `{
     "shows": false,
     "message": "Failed to authenticate token."
@@ -326,10 +339,11 @@ response if incorrect :
 
 #### SHOW PAST EVENTS
 
-URI : http://localhost:4444/events/show/past
-method: get
-HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
-response if correct : 
+- URI : http://localhost:4444/events/show/past
+- method: get
+- HEADER : [{"key":"x-access-token","value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwNzg5MjBAaG90bWFpbC5jb20iLCJtZHAiOiIkMmIkMTAkLmZUR3dVMjdadHA1UUZ1Z0tzbWpsLlVZczJQNVBoUEVGVE9TMXo1SHZWb0ZmelBNTmhkUGkiLCJub20iOiJjYWlsbGV0IiwicHJlbm9tIjoiamVhbiBwaGlsaXBwZSIsIl9pZCI6MiwiaWF0IjoxNTgyNzA4Mzk2fQ.CzjO62muIZ3vyVngeiKQ956B-HaUDpQ8bt2nFrWF1Dk"}]
+
+- response if correct : 
 `[
     {
         "eventsName": "Tournois de tennis",
@@ -353,7 +367,9 @@ response if correct :
         "photo": "https://www.saintsebastien.fr/sites/default/files/pmaa-diapo.jpg"
     }
 ]`
-response if incorrect : 
+
+- response if incorrect : 
+
 `{
     "shows": false,
     "message": "Failed to authenticate token."
