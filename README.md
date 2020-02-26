@@ -14,7 +14,7 @@ install `nodejs` & `npm`
 `npm run start`
 
 ## UML
-<div style="text-align:center"><img src="./image.png" width="300"></div>.
+<div style="text-align:center"><img src="./image.png"></div>.
 
 ## URL REQUEST
 
